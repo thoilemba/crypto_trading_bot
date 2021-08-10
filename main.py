@@ -1,6 +1,6 @@
 import tkinter as tk
 import logging
-from binance_futures import get_contract
+from connectors.binance_futures import BinanceFutureClient
 
 logger = logging.getLogger()
 
@@ -21,24 +21,8 @@ logger.addHandler(file_handler)
 
 if __name__ == '__main__':
 
-    binance_contracts = get_contract()
+    binance = BinanceFutureClient(True)
+    print(binance.get_historical_candles("BTCUSDT", "1h"))
 
     root = tk.Tk()
-    root.configure(bg='grey12')
-
-    font1 = ("Calibri", 12, "normal")
-
-    i = 0
-    j = 0
-
-    for contract in binance_contracts:
-        label_widget = tk.Label(root, text=contract, bg="grey12", fg="SteelBlue1", font=font1, width=13)
-        label_widget.grid(row=i, column=j, sticky="ew")
-
-        if i == 7:
-            j += 1
-            i = 0
-        else:
-            i += 1
-
     root.mainloop()
