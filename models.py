@@ -19,6 +19,19 @@ class Candle:
         self.volume = float(candle_info[5])
 
 
+def tick_to_decimals(tick_size: float) -> int:
+    tick_size_str = "{0:.8f}".format(tick_size)
+    while tick_size_str[-1] == "0":
+        tick_size_str = tick_size_str[:-1]
+
+    split_tick = tick_size_str.split(".")
+
+    if len(split_tick) > 1:
+        return len(split_tick[1])
+    else:
+        return 0
+
+
 class Contract:
     def __init__(self, contract_info):
         self.symbol = contract_info['symbol']
@@ -26,7 +39,8 @@ class Contract:
         self.quote_asset = contract_info['quoteAsset']
         self.price_decimals = contract_info['pricePrecision']
         self.quantity_decimals = contract_info['quantityPrecision']
-
+        self.tick_size = 1 / pow(10, contract_info['pricePrecision'])
+        self.lot_size = 1 / pow(10, contract_info['quantityPrecision'])
 
 class OrderStatus:
     def __init__(self, order_info):
