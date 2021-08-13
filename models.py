@@ -1,5 +1,3 @@
-
-
 class Balance:
     def __init__(self, info):
         self.initial_margin = float(info['initialMargin'])
@@ -41,6 +39,7 @@ class Contract:
         self.quantity_decimals = contract_info['quantityPrecision']
         self.tick_size = 1 / pow(10, contract_info['pricePrecision'])
         self.lot_size = 1 / pow(10, contract_info['quantityPrecision'])
+
 
 class OrderStatus:
     def __init__(self, order_info):
