@@ -2,6 +2,7 @@ import tkinter as tk
 from interface.styling import *
 from interface.logging_component import Logging
 from connectors.binance_futures import BinanceFutureClient
+from interface.watchlist_component import Watchlist
 
 
 class Root(tk.Tk):
@@ -19,6 +20,9 @@ class Root(tk.Tk):
 
         self._right_frame = tk.Frame(self, bg=BG_COLOR)
         self._right_frame.pack(side=tk.LEFT)
+
+        self._watchlist_frame = Watchlist(self.binance.contracts, self._left_frame, bg=BG_COLOR)
+        self._watchlist_frame.pack(side=tk.TOP)
 
         self._logging_frame = Logging(self._left_frame, bg=BG_COLOR)
         self._logging_frame.pack(side=tk.TOP)
